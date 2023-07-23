@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>localStorage</h2>
+    <button onclick="addmsg()">点我添加一个数据在本地存储</button>
+    <button onclick="getmsg()">点我在本地存储获取数据</button>
+    <button onclick="removemsg()">点我在本地存储移除数据</button>
+    <button onclick="clearmsg()">点我清空本地存储</button>
+
+    <script>
+        function addmsg() {
+            localStorage.setItem('msg', '雷好哇')
+            localStorage.setItem('obj', JSON.stringify({ name: '张三', age: 18 }))  // 存对象需要先转成 JSON 字符串格式
+        }
+
+        function getmsg() {
+            console.log(localStorage.getItem('msg'))
+            console.log(JSON.parse(localStorage.getItem('obj')))  // 读取像对象形式的字符串数据需要转成 对象 因为只是像并不是真的对象
+        }
+
+        function removemsg() {
+            localStorage.removeItem('msg')
+        }
+
+        function clearmsg() {
+            localStorage.clear()
+        }
+    </script>
+
+</body>
+
+</html>

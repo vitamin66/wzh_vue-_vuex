@@ -2,13 +2,13 @@
   <div id="app">
     <div class="todo-container">
       <div class="todo-wrap">
-        <MyHeader @addTodos="addTodos" />
-        <MyList :todos="todos" />
-        <MyFooter
+        <MyHeader :addTodos="addTodos" />
+        <MyList
           :todos="todos"
-          @clearTaskTodos="clearTaskTodos"
-          @checkeAllTodos="checkeAllTodos"
+          :changeTodos="changeTodos"
+          :deleteTodos="deleteTodos"
         />
+        <MyFooter :todos="todos" :clearTaskTodos="clearTaskTodos" :checkeAllTodos="checkeAllTodos"/>
       </div>
     </div>
   </div>
@@ -27,7 +27,11 @@ export default {
   },
   data() {
     return {
-      todos: JSON.parse(localStorage.getItem("todos")) || [],
+      todos: [
+        { id: "001", title: "喝酒", done: false },
+        { id: "002", title: "抽烟", done: true },
+        { id: "003", title: "烫头", done: false },
+      ],
     };
   },
   methods: {
@@ -59,23 +63,6 @@ export default {
         t.done = done;
       });
     },
-  },
-  watch: {
-    todos: {
-      deep: true,
-      handler(value) {
-        localStorage.setItem("todos", JSON.stringify(value));
-      },
-    },
-  },
-  // 用全局事件总线来 绑定自定义事件
-  mounted() {
-    this.$bus.$on("changeTodos", this.changeTodos);
-    this.$bus.$on("deleteTodos", this.deleteTodos);
-  },
-  // 同时也要写销毁前解绑的代码
-  beforeDestroy() {
-    this.$bus.$off(["changeTodos", "deleteTodos"]);
   },
 };
 </script>
