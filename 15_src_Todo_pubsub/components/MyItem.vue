@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import pubsub from "pubsub-js";
 export default {
   name: "MyItem",
   props: ["todo"],
@@ -20,13 +21,15 @@ export default {
     checkState(id) {
       // this.changeTodos(id);
       // 调用 $bus 身上的自定事件 给App传参
-      this.$bus.$emit("changeTodos", id);
+      // this.$bus.$emit("changeTodos", id);
+      pubsub.publish("changeTodos", id);
     },
     deleteTodo(id) {
       if (confirm("确定删除吗?")) {
         // this.deleteTodos(id);
         // 调用 $bus 身上的自定事件 给App传参
-        this.$bus.$emit("deleteTodos", id);
+        // this.$bus.$emit("deleteTodos", id);
+        pubsub.publish("deleteTodos", id);
       }
     },
   },
