@@ -9,17 +9,11 @@
           <!-- <a class="list-group-item active" href="./about.html">About</a>
           <a class="list-group-item" href="./home.html">Home</a> -->
 
-          <!-- replace 可以改变 浏览器前进后退历史模式 默认是 push模式 加了 replace 属性后就是replace模式 -->
-          <router-link
-            class="list-group-item"
-            active-class="active"
-            :to="{ name: 'guanyu' }"
+          <!-- 用路由获取路径需要用 router-link标签 其中 to 属性就是配置路径的 还可以用active-class属性来选择当前路径展示什么样式 -->
+          <router-link class="list-group-item" active-class="active" :to="{name:'guanyu'}"
             >About</router-link
           >
-          <router-link
-            class="list-group-item"
-            active-class="active"
-            to="/home"
+          <router-link class="list-group-item" active-class="active" to="/home"
             >Home</router-link
           >
         </div>
